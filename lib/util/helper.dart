@@ -37,15 +37,9 @@ class NetworkHelper {
 
   getSongsList(int limit, int offset) async {
     print("limit: $limit, offset: $offset");
-    String langData = "";
-    if (kLangSel == "ENG") {
-      langData = "engSong";
-    } else {
-      langData = "hndSong";
-    }
     dynamic res = await NetworkHelper()._getSongsData(limit, offset);
-    for (; i < res['data'][langData].length; i++) {
-      String id = res['data'][langData][i]['id'];
+    for (; i < res['data']['Song'].length; i++) {
+      String id = res['data']['Song'][i]['id'];
       dynamic songUrl = await NetworkHelper()._getSongLink(id);
       var title = songUrl['data']['URL']['title'];
       var url = songUrl['data']['URL']['url'];
